@@ -65,6 +65,7 @@ for part in parts:
         print('Availability: \t',part.find('{http://api.mouser.com/service}Availability').text)
         print('LeadTime: \t',part.find('{http://api.mouser.com/service}LeadTime').text)
         print('OnOrder: \t',part.find('{http://api.mouser.com/service}FactoryStock').text)
+        print('Price @',part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Quantity').text,': \t',part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Price').text)
     else:
         print('\n')
         #print('Mouser part #:\t',part.find('{http://api.mouser.com/service}MouserPartNumber').text)
