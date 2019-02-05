@@ -19,7 +19,7 @@ data = '<?xml version="1.0" encoding="utf-8"?>\
 </soap:Header>\
 <soap:Body>\
 <SearchByPartNumber xmlns="http://api.mouser.com/service">\
-<mouserPartNumber>NTR3C21</mouserPartNumber>\
+<mouserPartNumber>MAX423</mouserPartNumber>\
 <partSearchOptions>BeginsWith</partSearchOptions>\
 </SearchByPartNumber>\
 </soap:Body>\
@@ -32,7 +32,7 @@ r = requests.post(url,data=data,headers={'Content-type':'text/xml'})
 print('HTTP Response: \t',r.status_code,r.reason,'\n')
 #e = xml.etree.ElementTree.parse(r).getroot()
 tree = ET.ElementTree(ET.fromstring(r.text))
-#print(tree.getroot().tag)
+#print(tree.getroot())
 root = tree.getroot()
 
 body = root.getchildren()
@@ -55,9 +55,11 @@ parts = el3[1].getchildren()
 #print('parts: ',parts)
 part1 = parts[0]
 
+parts = root.findall('{http://schemas.xmlsoap.org/soap/envelope/}Body/{http://api.mouser.com/service}SearchByPartNumberResponse/{http://api.mouser.com/service}SearchByPartNumberResult/{http://api.mouser.com/service}Parts/{http://api.mouser.com/service}MouserPart')
+
 print('--------------------------')
 for part in parts:
-    if 'N/A' not in part.find('{http://api.mouser.com/service}MouserPartNumber').text:
+    if 'N/A' not in part.find('{http://api.mouser.com/service}MouserPartNumber').text and part.find('{http://api.mouser.com/service}Availability') is not None:
         print('\n')
         print('Mouser part #:\t',part.find('{http://api.mouser.com/service}MouserPartNumber').text)
         print('Availability: \t',part.find('{http://api.mouser.com/service}Availability').text)
@@ -65,6 +67,7 @@ for part in parts:
         print('OnOrder: \t',part.find('{http://api.mouser.com/service}FactoryStock').text)
     else:
         print('\n')
+        #print('Mouser part #:\t',part.find('{http://api.mouser.com/service}MouserPartNumber').text)
         print('Found N/A part')
 print('--------------------------')
 
