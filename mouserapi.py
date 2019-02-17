@@ -128,7 +128,7 @@ def SearchShort(keyword):
 
     import requests
     import xml.etree.ElementTree as ET
-    print('Searching for '+keyword+'...\n')
+    #print('Searching for '+keyword+'...\n')
 
     url = 'http://api.mouser.com/service/searchapi.asmx?wsdl'
     #url = 'http://api.mouser.com/service/SearchByKeyword'
@@ -158,7 +158,7 @@ def SearchShort(keyword):
     #data = data1 + str + data2
 
     r = requests.post(url,data=data,headers={'Content-type':'text/xml'})
-    print('HTTP Response: \t',r.status_code,r.reason)
+   #print('HTTP Response: \t',r.status_code,r.reason)
     tree = ET.ElementTree(ET.fromstring(r.text))
     root = tree.getroot()
 
@@ -168,17 +168,17 @@ def SearchShort(keyword):
     keys = ['Part','Availability','Quantity','Price']
 
     if(r.status_code == 200):
-        print('--------------------------')
+        #print('--------------------------')
         i = 0
         for part in parts:
             if 'N/A' not in part.find('{http://api.mouser.com/service}MouserPartNumber').text and part.find('{http://api.mouser.com/service}Availability') is not None:
                 #print('\n')
-                print('Mouser part #:\t',part.find('{http://api.mouser.com/service}MouserPartNumber').text)
+                #print('Mouser part #:\t',part.find('{http://api.mouser.com/service}MouserPartNumber').text)
                 #print('Category:\t',part.find('{http://api.mouser.com/service}Category').text)
-                print('Availability: \t',part.find('{http://api.mouser.com/service}Availability').text)
+                #print('Availability: \t',part.find('{http://api.mouser.com/service}Availability').text)
                 #print('LeadTime: \t',part.find('{http://api.mouser.com/service}LeadTime').text)
                 #print('OnOrder: \t',part.find('{http://api.mouser.com/service}FactoryStock').text)
-                print('Price @',part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Quantity').text,': \t',part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Price').text)
+                #print('Price @',part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Quantity').text,': \t',part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Price').text)
                 #print('Description: \t',part.find('{http://api.mouser.com/service}Description').text)
 
                 #partdict = {'Availability':part.find('{http://api.mouser.com/service}Availability').text,'Quantity':part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Quantity').text,'Price':part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Price').text}
@@ -192,11 +192,11 @@ def SearchShort(keyword):
                 #print('Mouser part #:\t',part.find('{http://api.mouser.com/service}MouserPartNumber').text)
                 print('Found N/A part')
 
-        print('--------------------------')
+        #print('--------------------------')
         #print(mouserparts[1:len(mouserparts)]['Part'])
-        print(mouserparts[1]['Price'])
-        for p in mouserparts:
-            print(p['Price'])
+        #print(mouserparts[1]['Price'])
+        #for p in mouserparts:
+            #print(p['Part']+' '+p['Price'])
         return mouserparts
         
     else:
