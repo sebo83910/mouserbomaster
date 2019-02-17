@@ -15,9 +15,10 @@ with open('test.csv', newline='') as csvfile:
     csvfile.seek(0)
     spamreader = csv.DictReader(csvfile,fieldnames=('Id','Designator','Package','Quantity','Designation','Supplier','ref'),delimiter=';')
     for i,row in enumerate(spamreader):
-        print(i+1,'/',totalrows)
-        mapi.SearchShort(row['Designation'])
-        sleep(2)
+        if(i>0):
+            print(i+1,'/',totalrows)
+            mapi.SearchShort(row['Designation'])
+            sleep(2)
 
 
 #print(row['Package'], row['Quantity'], row['Id'], row['Designation'])
