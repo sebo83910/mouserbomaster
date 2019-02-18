@@ -146,7 +146,7 @@ def SearchShort(keyword):
     <SearchByKeyword xmlns="http://api.mouser.com/service">\
     <keyword>'+keyword+'</keyword>\
     <records>'
-    data += str(3)
+    data += str(1)
     data += '</records>\
     <startingRecord>0</startingRecord>\
     <searchOptions>InStock</searchOptions>\
@@ -165,7 +165,7 @@ def SearchShort(keyword):
     parts = root.findall('{http://schemas.xmlsoap.org/soap/envelope/}Body/{http://api.mouser.com/service}SearchByKeywordResponse/{http://api.mouser.com/service}SearchByKeywordResult/{http://api.mouser.com/service}Parts/{http://api.mouser.com/service}MouserPart')
 
     mouserparts = []
-    keys = ['Part','Availability','Quantity','Price']
+    keys = ['Part','Category','Availability','Quantity','Price','Description','FactoryStock','LeadTime']
 
     if(r.status_code == 200):
         #print('--------------------------')
@@ -185,7 +185,14 @@ def SearchShort(keyword):
                 
                 #partdict = [part.find('{http://api.mouser.com/service}Availability').text,part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Quantity').text,part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Price').text]
                 #mouserparts.append(dict(zip(keys,partdict)))
-                mouserparts.append({'Part':part.find('{http://api.mouser.com/service}MouserPartNumber').text,'Availability':part.find('{http://api.mouser.com/service}Availability').text,'Quantity':part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Quantity').text,'Price':part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Price').text})
+                mouserparts.append({'Part':part.find('{http://api.mouser.com/service}MouserPartNumber').text,
+                    'Category':part.find('{http://api.mouser.com/service}Category').text,
+                    'Description':part.find('{http://api.mouser.com/service}Description').text,
+                    'Availability':part.find('{http://api.mouser.com/service}Availability').text,
+                    'FactoryStock':part.find('{http://api.mouser.com/service}FactoryStock').text,
+                    'LeadTime':part.find('{http://api.mouser.com/service}LeadTime').text,
+                    'Quantity':part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Quantity').text,
+                    'Price':part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Price').text})
                 i += 1
             else:
                 print('\n')

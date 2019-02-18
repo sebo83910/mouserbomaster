@@ -18,12 +18,13 @@ with open('test.csv', newline='') as csvfile:
     for i,row in enumerate(spamreader):
         #print('%3.1f'%(i+1/totalrows*100),'%',end="\r")#,flush='true')
         print('Searched:',(i+1),'/',totalrows,' - Searching for: ',(row['Designation']),'                   ',end='\r',flush='true')
-        if(i>65):
+        if(i>63):
             parts.append(mapi.SearchShort(row['Designation']))
             sleep(2)
     print('')
     print(parts[0])
     print(parts[0][0].keys())
+    print(parts[0].__sizeof__())
 
 
 
