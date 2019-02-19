@@ -128,6 +128,8 @@ def SearchShort(keyword):
 
     import requests
     import xml.etree.ElementTree as ET
+    from collections import OrderedDict
+    from operator import itemgetter
     #print('Searching for '+keyword+'...\n')
 
     url = 'http://api.mouser.com/service/searchapi.asmx?wsdl'
@@ -146,7 +148,7 @@ def SearchShort(keyword):
     <SearchByKeyword xmlns="http://api.mouser.com/service">\
     <keyword>'+keyword+'</keyword>\
     <records>'
-    data += str(1)
+    data += str(3)
     data += '</records>\
     <startingRecord>0</startingRecord>\
     <searchOptions>InStock</searchOptions>\
@@ -195,16 +197,24 @@ def SearchShort(keyword):
                     'Price':part.find('{http://api.mouser.com/service}PriceBreaks/{http://api.mouser.com/service}Pricebreaks/{http://api.mouser.com/service}Price').text})
                 i += 1
             else:
-                print('\n')
+                #print('\n')
                 #print('Mouser part #:\t',part.find('{http://api.mouser.com/service}MouserPartNumber').text)
-                print('Found N/A part')
+                #print('Found N/A part')
+                
+                mouserparts.append({'Part':'N/A','Category':'N/A','Description':'N/A','Availability':'N/A','FactoryStock':'N/A','LeadTime':'N/A','Quantity':'N/A','Price':'N/A'})
 
         #print('--------------------------')
         #print(mouserparts[1:len(mouserparts)]['Part'])
         #print(mouserparts[1]['Price'])
+        bob = []
         #for p in mouserparts:
             #print(p['Part']+' '+p['Price'])
-        return mouserparts
+            #print(p)
+        newlist = sorted(mouserparts,key=itemgetter('Price'))
+            #bob.append(newlist)
+        #print(mouserparts)
+        #print(newlist)
+        return newlist
         
     else:
         raise Exception('Mouser API returned: {}'.format(r.status_code)+' - {}'.format(r.reason))

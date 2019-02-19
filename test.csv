@@ -48,16 +48,6 @@ Id;Designator;Package;Quantity;Designation;Supplier and ref
 16;U11,U12;SOT-23-5;2;MIC5504-1.8YM5;
 25;U5;SOT-23-6_Handsoldering;1;OPA300;
 23;U9;SSOP-16_4.4x5.2mm_P0.65mm;1;74CBTLV3253;
-8;TP5;TestPoint_Pad_D1.0mm;1;LO_A;
-9;TP8;TestPoint_Pad_D1.0mm;1;LO_B;
-10;TP6;TestPoint_Pad_D1.0mm;1;RF_B;
-11;TP3;TestPoint_Pad_D1.0mm;1;GND;
-12;TP7;TestPoint_Pad_D1.0mm;1;RF_A;
-13;TP4;TestPoint_Pad_D1.0mm;1;RF_BUFFERED;
-18;PSU-1;TestPoint_THTPad_2.0x2.0mm_Drill1.0mm;1;PSU-;
-19;PSU+1;TestPoint_THTPad_2.0x2.0mm_Drill1.0mm;1;PSU+;
-63;W2;TestPoint_THTPad_2.0x2.0mm_Drill1.0mm;1;RX;
-64;W1;TestPoint_THTPad_2.0x2.0mm_Drill1.0mm;1;TX;
 50;IC1;TQFP-48_7x7mm_P0.5mm;1;ATSAMD21G18A-AU;
 49;IC2;TQFP-48-1EP_7x7mm_P0.5mm_EP3.5x3.5mm;1;AD9954;
 24;U1;TSSOP-14_4.4x5mm_P0.65mm;1;74HC14;
